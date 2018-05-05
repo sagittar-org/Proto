@@ -1,0 +1,13 @@
+{
+    "name": "pieni/proto",
+    "description": "Design the application",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "pieni\\Proto\\": "src"
+        }
+    },
+    "require": {
+        "pieni/sync": "0.2.0"
+    }
+}
