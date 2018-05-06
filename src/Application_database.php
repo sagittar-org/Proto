@@ -3,7 +3,9 @@ namespace pieni\Proto;
 
 class Application_database implements \pieni\Sync\Driver
 {
-	public $columns = ['unset' => ['unset', 'from', 'actor']];
+	public static $columns = [
+		'unset' => ['unset', 'from', 'actor']
+	];
 
 	public function __construct($params = [])
 	{

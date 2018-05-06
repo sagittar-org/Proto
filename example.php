@@ -4,6 +4,14 @@ require_once 'vendor/autoload.php';
 $database = 'world';
 $db = new mysqli('localhost', 'root', '');
 
+$config = new \pieni\Sync\Handler('config', [
+//	['\pieni\Sync\Json', ['path' => __DIR__]],
+	['\pieni\Proto\Config', []],
+]);
+$config = $config->get();
+$database = $config['db']['database']['value'];
+$db = new mysqli($config['db']['host']['value'], $config['db']['user']['value'], $config['db']['password']['value']);
+
 $actual_database = new \pieni\Sync\Handler('actual_database', [
 //	['\pieni\Sync\Json', ['path' => __DIR__]],
 	['\pieni\Proto\Actual_database', ['database' => $database, 'db' => $db]],

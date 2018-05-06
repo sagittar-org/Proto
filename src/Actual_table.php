@@ -3,6 +3,11 @@ namespace pieni\Proto;
 
 class Actual_table implements \pieni\Sync\Driver
 {
+	public static $columns = [
+		'primary_keys' => [],
+		'columns' => ['type', 'nullable', 'default', 'extra'],
+	];
+
 	public function __construct($params = [])
 	{
 		$this->database = $params['database'];

@@ -3,7 +3,7 @@ namespace pieni\Proto;
 
 class Application_table implements \pieni\Sync\Driver
 {
-	public $columns = [
+	public static $columns = [
 		'actions' => [],
 		'unset' => ['unset', 'from', 'actor', 'alias', 'action'],
 	];

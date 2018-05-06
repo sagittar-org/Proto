@@ -3,6 +3,11 @@ namespace pieni\Proto;
 
 class Request_database implements \pieni\Sync\Driver
 {
+	public static $columns = [
+		'tables' => [],
+		'references' => ['table', 'column', 'referenced_table', 'referenced_column'],
+	];
+
 	public function __construct($params = [])
 	{
 		$this->actual_database = $params['actual_database'];
@@ -12,8 +17,8 @@ class Request_database implements \pieni\Sync\Driver
 	public function mtime($name = '')
 	{
 		return max(
-			$this->actual_database->mtime($name),
-			$this->application_database->mtime($name)
+			$this->actual_database->mtime(),
+			$this->application_database->mtime()
 		);
 	}
 

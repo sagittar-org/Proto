@@ -3,6 +3,12 @@ namespace pieni\Proto;
 
 class Request_table implements \pieni\Sync\Driver
 {
+	public static $columns = [
+		'primary_keys' => [],
+		'actions' => [],
+		'columns' => ['type', 'nullable', 'default', 'extra'],
+	];
+
 	public function __construct($params = [])
 	{
 		$this->request_database = $params['request_database'];
