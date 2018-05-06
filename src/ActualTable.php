@@ -1,7 +1,7 @@
 <?php
 namespace pieni\Proto;
 
-class Actual_table implements \pieni\Sync\Driver
+class ActualTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'primary_keys' => [],

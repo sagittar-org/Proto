@@ -1,7 +1,7 @@
 <?php
 namespace pieni\Proto;
 
-class Application_table implements \pieni\Sync\Driver
+class ApplicationTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'actions' => [],

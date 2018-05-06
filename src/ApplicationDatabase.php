@@ -1,7 +1,7 @@
 <?php
 namespace pieni\Proto;
 
-class Application_database implements \pieni\Sync\Driver
+class ApplicationDatabase implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'unset' => ['unset', 'from', 'actor']

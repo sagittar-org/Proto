@@ -1,7 +1,7 @@
 <?php
 namespace pieni\Proto;
 
-class Request_table implements \pieni\Sync\Driver
+class RequestTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'primary_keys' => [],
