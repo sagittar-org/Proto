@@ -1,7 +1,20 @@
 {
     "name": "pieni/proto",
     "description": "Design the application",
+    "type": "library",
+    "keywords": [
+        "pieni",
+        "sync",
+        "prototyping"
+    ],
+    "homepage": "https://github.com/sagittar-org/pieni",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Sagittarius Systems",
+            "homepage": "https://github.com/sagittar-org"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "pieni\\Proto\\": "src"
