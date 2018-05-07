@@ -10,7 +10,7 @@ class RequestDatabase implements \pieni\Sync\Driver
 
 	public function __construct($params = [])
 	{
-		$this->actual_database = $params['actual_database'];
+		$this->actual_database = end($params['application_database']->drivers)->actual_database;
 		$this->application_database = $params['application_database'];
 	}
 

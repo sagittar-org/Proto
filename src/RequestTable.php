@@ -12,7 +12,7 @@ class RequestTable implements \pieni\Sync\Driver
 	public function __construct($params = [])
 	{
 		$this->request_database = $params['request_database'];
-		$this->actual_table = $params['actual_table'];
+		$this->actual_table = end($params['application_table']->drivers)->actual_table;
 		$this->application_table = $params['application_table'];
 	}
 

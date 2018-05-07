@@ -23,7 +23,7 @@ $application_database = new \pieni\Sync\Handler('application_database', [
 	['\pieni\Proto\ApplicationDatabase', ['actual_database' => $actual_database]],
 ]);
 $request_database = new \pieni\Sync\Handler('request_database', [
-	['\pieni\Proto\RequestDatabase', ['actual_database' => $actual_database, 'application_database' => $application_database]],
+	['\pieni\Proto\RequestDatabase', ['application_database' => $application_database]],
 ]);
 $actual_table = new \pieni\Sync\Handler('actual_table', [
 //	['\pieni\Sync\Json', ['path' => __DIR__]],
@@ -36,7 +36,7 @@ $application_table = new \pieni\Sync\Handler('application_table', [
 	['\pieni\Proto\ApplicationTable', ['actual_table' => $actual_table]],
 ]);
 $request_table = new \pieni\Sync\Handler('request_table', [
-	['\pieni\Proto\RequestTable', ['request_database' => $request_database, 'actual_table' => $actual_table, 'application_table' => $application_table]],
+	['\pieni\Proto\RequestTable', ['request_database' => $request_database, 'application_table' => $application_table]],
 ]);
 echo "<pre>";
 //print_r( $actual_database->get() );
