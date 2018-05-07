@@ -5,6 +5,7 @@ class Config implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'db' => ['value'],
+		'languages' => [],
 		'actors' => [],
 	];
 
@@ -24,6 +25,10 @@ class Config implements \pieni\Sync\Driver
 			'user' => ['value' => 'root'],
 			'password' => ['value' => ''],
 			'database' => ['value' => 'world'],
+		];
+		$data['languages'] = [
+			'en' => [],
+			'ja' => [],
 		];
 		$data['actors'] = [
 			'g' => [],
