@@ -8,7 +8,7 @@ MySQL 5.7.x / PHP 7.0.x
 
 ## Install
 ```bash
-composer require pieni/proto:0.1.0
+composer require pieni/proto
 ```
 
 ## License
