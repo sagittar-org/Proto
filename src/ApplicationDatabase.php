@@ -4,6 +4,8 @@ namespace pieni\Proto;
 class ApplicationDatabase implements \pieni\Sync\Driver
 {
 	public static $columns = [
+		'tables' => [],
+		'references' => [],
 		'unset' => ['unset', 'from', 'actor']
 	];
 
@@ -19,7 +21,18 @@ class ApplicationDatabase implements \pieni\Sync\Driver
 
 	public function get($name = '')
 	{
-		return ['unset' => []];
+		$actual_database = $this->actual_database->get();
+		foreach ($actual_database['tables'] as $table_name => $table) {
+			$tables[$table_name] = [];
+		}
+		foreach ($actual_database['references'] as $reference_name => $reference) {
+			$references[$reference_name] = [];
+		}
+		return [
+			'tables' => $tables,
+			'references' => $references,
+			'unset' => [],
+		];
 	}
 
 	public function put($data, $mtime, $name = '')

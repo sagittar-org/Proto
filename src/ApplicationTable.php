@@ -5,6 +5,7 @@ class ApplicationTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'actions' => [],
+		'columns' => ['expr'],
 		'unset' => ['unset', 'from', 'actor', 'alias', 'action'],
 	];
 
@@ -20,11 +21,21 @@ class ApplicationTable implements \pieni\Sync\Driver
 
 	public function get($name = '')
 	{
+		$actual_table = $this->actual_table->get($name);
+		foreach ($actual_table['columns'] as $column_name => $column) {
+			$columns[$column_name] = [
+				'expr' => '',
+			];
+		}
 		return [
 			'actions' => [
 				'index' => [],
 				'view' => [],
+				'add' => [],
+				'edit' => [],
+				'delete' => [],
 			],
+			'columns' => $columns,
 			'unset' => [],
 		];
 	}

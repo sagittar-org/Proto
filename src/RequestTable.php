@@ -6,7 +6,7 @@ class RequestTable implements \pieni\Sync\Driver
 	public static $columns = [
 		'primary_keys' => [],
 		'actions' => [],
-		'columns' => ['type', 'nullable', 'default', 'extra'],
+		'columns' => ['expr', 'type', 'nullable', 'default', 'extra'],
 	];
 
 	public function __construct($params = [])
@@ -40,7 +40,25 @@ class RequestTable implements \pieni\Sync\Driver
 		$application_table = $this->application_table->get($name);
 		$data['primary_keys'] = $actual_table['primary_keys'];
 		$data['actions'] = $application_table['actions'];
-		$data['columns'] = $actual_table['columns'];
+		foreach ($application_table['columns'] as $column_name => $column) {
+			if (isset($actual_table['columns'][$column_name])) {
+				$data['columns'][$column_name] = [
+					'expr' => '',
+					'type' => $actual_table['columns'][$column_name]['type'],
+					'nullable' => $actual_table['columns'][$column_name]['nullable'],
+					'default' => $actual_table['columns'][$column_name]['default'],
+					'extra' => $actual_table['columns'][$column_name]['extra'],
+				];
+			} else {
+				$data['columns'][$column_name] = [
+					'expr' => $application_table['columns'][$column_name]['expr'],
+					'type' => '',
+					'nullable' => '',
+					'default' => '',
+					'extra' => '',
+				];
+			}
+		}
 		foreach ($application_table['unset'] as $unset) {
 			if (preg_match("/{$unset['actor']}/", $actor) && preg_match("/{$unset['alias']}/", $alias) && preg_match("/{$unset['action']}/", $action)) {
 				unset($data[$unset['from']][$unset['unset']]);
