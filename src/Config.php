@@ -20,6 +20,12 @@ class Config implements \pieni\Sync\Driver
 
 	public function get($name = '')
 	{
+		if (function_exists('fallback')) {
+			$fallback = fallback([g('packages'), ['sync/json'], ['config.json']], false);
+			if ($fallback !== null) {
+				return json_decode(file_get_contents($fallback), true);
+			}
+		}
 		$data['db'] = [
 			'host' => ['value' => 'localhost'],
 			'user' => ['value' => 'root'],

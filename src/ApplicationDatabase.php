@@ -23,14 +23,14 @@ class ApplicationDatabase implements \pieni\Sync\Driver
 	{
 		$actual_database = $this->actual_database->get();
 		foreach ($actual_database['tables'] as $table_name => $table) {
-			$tables[$table_name] = [];
+			$data['tables'][$table_name] = [];
 		}
 		foreach ($actual_database['references'] as $reference_name => $reference) {
-			$references[$reference_name] = [];
+			$data['references'][$reference_name] = [];
 		}
 		return [
-			'tables' => $tables,
-			'references' => $references,
+			'tables' => $data['tables'],
+			'references' => $data['references'],
 			'unset' => [],
 		];
 	}
