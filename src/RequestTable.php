@@ -18,10 +18,11 @@ class RequestTable implements \pieni\Sync\Driver
 
 	public function mtime($name = '')
 	{
+		list($actor, $alias, $action) = explode('.', $name);
 		return max(
-			$this->request_database->mtime($name),
-			$this->actual_table->mtime($name),
-			$this->application_table->mtime($name)
+			$this->request_database->mtime($actor),
+			$this->actual_table->mtime(''),
+			$this->application_table->mtime($alias)
 		);
 	}
 
