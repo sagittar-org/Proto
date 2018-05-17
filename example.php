@@ -26,10 +26,10 @@ $request_database = new \pieni\Sync\Handler('request_database', [
 $actual_table = new \pieni\Sync\Handler('actual_table', [
 	['\pieni\Proto\ActualTable', ['database' => $database, 'db' => $db]],
 ]);
-//$application_table = new \pieni\Sync\Handler('application_table', [
-//	['\pieni\Proto\ApplicationTable', ['actual_table' => $actual_table]],
-//]);
+$application_table = new \pieni\Sync\Handler('application_table', [
+	['\pieni\Proto\ApplicationTable', ['config' => $config, 'actual_database' => $actual_database, 'actual_table' => $actual_table]],
+]);
 //$request_table = new \pieni\Sync\Handler('request_table', [
 //	['\pieni\Proto\RequestTable', ['application_table' => $application_table]],
 //]);
-//print_r($request_table->get());
+print_r($application_table->get('post'));

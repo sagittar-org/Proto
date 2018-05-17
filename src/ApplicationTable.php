@@ -4,13 +4,16 @@ namespace pieni\Proto;
 class ApplicationTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
+		'actors' => [],
+		'aliases' => [],
 		'actions' => [],
 		'columns' => ['expr'],
-		'unset' => ['unset', 'from', 'actor', 'alias', 'action'],
 	];
 
 	public function __construct($params = [])
 	{
+		$this->config = $params['config'];
+		$this->actual_database = $params['actual_database'];
 		$this->actual_table = $params['actual_table'];
 	}
 
@@ -21,6 +24,12 @@ class ApplicationTable implements \pieni\Sync\Driver
 
 	public function get($name = '')
 	{
+		$config = $this->config->get();
+		$actual_database = $this->actual_database->get();
+		foreach ($actual_database['references'] as $reference_name => $reference) {
+			if ($reference['table'] !== $name) continue;
+			$aliases[$reference_name] = $reference;
+		}
 		$actual_table = $this->actual_table->get($name);
 		foreach ($actual_table['columns'] as $column_name => $column) {
 			$columns[$column_name] = [
@@ -28,6 +37,8 @@ class ApplicationTable implements \pieni\Sync\Driver
 			];
 		}
 		return [
+			'actors' => $config['actors'],
+			'aliases' => $aliases,
 			'actions' => [
 				'index' => [],
 				'view' => [],
@@ -36,7 +47,6 @@ class ApplicationTable implements \pieni\Sync\Driver
 				'delete' => [],
 			],
 			'columns' => $columns,
-			'unset' => [],
 		];
 	}
 
