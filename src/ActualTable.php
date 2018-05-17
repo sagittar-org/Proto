@@ -5,7 +5,6 @@ class ActualTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
 		'primary_keys' => [],
-		'children' => ['value'],
 		'columns' => ['type', 'nullable', 'default', 'extra'],
 	];
 
@@ -33,7 +32,6 @@ class ActualTable implements \pieni\Sync\Driver
 			WHERE `TABLE_SCHEMA` = '{$this->database}' AND `TABLE_NAME` = '{$name}' AND `COLUMN_KEY` = 'PRI'
 			ORDER BY `ORDINAL_POSITION` ASC
 		")->fetch_all(MYSQLI_ASSOC), 'COLUMN_NAME');
-		$data['children'] = ['dummy' => ['value' => 'hoge']];
 		$data['columns'] = $this->listToHash($this->db->query("
 			SELECT
 				`COLUMN_NAME`,

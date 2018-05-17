@@ -30,7 +30,7 @@ class Config implements \pieni\Sync\Driver
 			'host' => ['value' => 'localhost'],
 			'user' => ['value' => 'root'],
 			'password' => ['value' => ''],
-			'database' => ['value' => 'world'],
+			'database' => ['value' => 'pieni-tutorial'],
 		];
 		$data['languages'] = [
 			'en' => [],

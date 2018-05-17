@@ -6,7 +6,6 @@ class RequestDatabase implements \pieni\Sync\Driver
 	public static $columns = [
 		'tables' => [],
 		'references' => ['table', 'column', 'referenced_table', 'referenced_column'],
-		'er_diagram' => ['value'],
 	];
 
 	public function __construct($params = [])
@@ -39,18 +38,9 @@ class RequestDatabase implements \pieni\Sync\Driver
 				unset($data[$unset['from']][$unset['unset']]);
 			}
 		}
-		foreach (array_keys($data['tables']) as $table) {
-			$lines[] = "{$table};";
-		}
-		foreach ($data['references'] as $reference_name => $reference) {
-			$lines[] = "{$reference['referenced_table']}->{$reference['table']} [label='{$reference_name}'];";
-		}
-		$er_diagram['dot']['value'] = "digraph er_diagram {\n\trankdir=LR;\n\t".implode("\n\t", $lines)."\n}\n";
-		$er_diagram['base64']['value'] = 'data:image/svg+xml;base64,'.shell_exec("echo '{$er_diagram['dot']['value']}' | dot -Tsvg | base64 -w0");
 		return [
 			'tables' => $data['tables'],
 			'references' => $data['references'],
-			'er_diagram' => $er_diagram,
 		];
 	}
 

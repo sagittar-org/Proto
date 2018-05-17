@@ -6,7 +6,6 @@ class ApplicationDatabase implements \pieni\Sync\Driver
 	public static $columns = [
 		'tables' => [],
 		'references' => [],
-		'unset' => ['unset', 'from', 'actor']
 	];
 
 	public function __construct($params = [])
@@ -31,7 +30,6 @@ class ApplicationDatabase implements \pieni\Sync\Driver
 		return [
 			'tables' => $data['tables'],
 			'references' => $data['references'],
-			'unset' => [],
 		];
 	}
 
