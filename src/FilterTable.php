@@ -19,13 +19,7 @@ class FilterTable implements \pieni\Sync\Driver
 	public function get($name = '')
 	{
 		return [
-			'filters' => [[
-				'actor' => 'g',
-				'alias' => 'post',
-				'action' => 'index',
-				'from' => 'columns',
-				'target_id' => 'post_text',
-			]],
+			'filters' => [],
 		];
 	}
 
