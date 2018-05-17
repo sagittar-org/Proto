@@ -20,4 +20,16 @@ $application_database = new \pieni\Sync\Handler('application_database', [
 $request_database = new \pieni\Sync\Handler('request_database', [
 	['\pieni\Proto\RequestDatabase', ['application_database' => $application_database]],
 ]);
-print_r($request_database->get());
+//print_r($request_database->get());
+
+// Table
+$actual_table = new \pieni\Sync\Handler('actual_table', [
+	['\pieni\Proto\ActualTable', ['database' => $database, 'db' => $db]],
+]);
+//$application_table = new \pieni\Sync\Handler('application_table', [
+//	['\pieni\Proto\ApplicationTable', ['actual_table' => $actual_table]],
+//]);
+//$request_table = new \pieni\Sync\Handler('request_table', [
+//	['\pieni\Proto\RequestTable', ['application_table' => $application_table]],
+//]);
+//print_r($request_table->get());
