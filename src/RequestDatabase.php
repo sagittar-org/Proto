@@ -10,15 +10,17 @@ class RequestDatabase implements \pieni\Sync\Driver
 
 	public function __construct($params = [])
 	{
-		$this->actual_database = end($params['application_database']->drivers)->actual_database;
+		$this->actual_database = $params['actual_database'];
 		$this->application_database = $params['application_database'];
+		$this->filter_database = $params['filter_database'];
 	}
 
 	public function mtime($name = '')
 	{
 		return max(
 			$this->actual_database->mtime(),
-			$this->application_database->mtime()
+			$this->application_database->mtime(),
+			$this->filter_database->mtime()
 		);
 	}
 
@@ -33,10 +35,9 @@ class RequestDatabase implements \pieni\Sync\Driver
 		foreach ($application_database['references'] as $reference_name => $reference) {
 			$data['references'][$reference_name] = $actual_database['references'][$reference_name];
 		}
-		foreach ($application_database['unset'] as $unset) {
-			if (preg_match("/{$unset['actor']}/", $actor)) {
-				unset($data[$unset['from']][$unset['unset']]);
-			}
+		foreach ($this->filter_database->get()['filters'] as $filter) {
+			if ($filter['actor'] !== $actor) continue;
+			unset($data[$filter['from']][$filter['target_id']]);
 		}
 		return [
 			'tables' => $data['tables'],

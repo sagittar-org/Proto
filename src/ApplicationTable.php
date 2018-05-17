@@ -28,7 +28,7 @@ class ApplicationTable implements \pieni\Sync\Driver
 		$actual_database = $this->actual_database->get();
 		foreach ($actual_database['references'] as $reference_name => $reference) {
 			if ($reference['table'] !== $name) continue;
-			$aliases[$reference_name] = $reference;
+			$aliases[$reference_name] = [];
 		}
 		$actual_table = $this->actual_table->get($name);
 		foreach ($actual_table['columns'] as $column_name => $column) {

@@ -4,15 +4,15 @@ namespace pieni\Proto;
 class RequestTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
-		'primary_keys' => [],
 		'actions' => [],
+		'primary_keys' => [],
 		'columns' => ['expr', 'type', 'nullable', 'default', 'extra'],
 	];
 
 	public function __construct($params = [])
 	{
 		$this->request_database = $params['request_database'];
-		$this->actual_table = end($params['application_table']->drivers)->actual_table;
+		$this->actual_table = $params['actual_table'];
 		$this->application_table = $params['application_table'];
 	}
 
@@ -39,8 +39,8 @@ class RequestTable implements \pieni\Sync\Driver
 		}
 		$actual_table = $this->actual_table->get($name);
 		$application_table = $this->application_table->get($name);
-		$data['primary_keys'] = $actual_table['primary_keys'];
 		$data['actions'] = $application_table['actions'];
+		$data['primary_keys'] = $actual_table['primary_keys'];
 		foreach ($application_table['columns'] as $column_name => $column) {
 			if (isset($actual_table['columns'][$column_name])) {
 				$data['columns'][$column_name] = [
