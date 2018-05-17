@@ -36,6 +36,6 @@ $filter_table = new \pieni\Sync\Handler('filter_table', [
 	['\pieni\Proto\FilterTable', []],
 ]);
 $request_table = new \pieni\Sync\Handler('request_table', [
-	['\pieni\Proto\RequestTable', ['request_database' => $request_database, 'actual_table' => $actual_table, 'application_table' => $application_table]],
+	['\pieni\Proto\RequestTable', ['request_database' => $request_database, 'actual_table' => $actual_table, 'application_table' => $application_table, 'filter_table' => $filter_table]],
 ]);
 print_r($request_table->get('g.post.index'));

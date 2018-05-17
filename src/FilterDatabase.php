@@ -18,7 +18,9 @@ class FilterDatabase implements \pieni\Sync\Driver
 
 	public function get($name = '')
 	{
-		return [];
+		return [
+			'filters' => [],
+		];
 	}
 
 	public function put($data, $mtime, $name = '')

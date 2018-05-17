@@ -36,13 +36,10 @@ class RequestDatabase implements \pieni\Sync\Driver
 			$data['references'][$reference_name] = $actual_database['references'][$reference_name];
 		}
 		foreach ($this->filter_database->get()['filters'] as $filter) {
-			if ($filter['actor'] !== $actor) continue;
+			if (!in_array($filter['actor'], ['', $actor])) continue;
 			unset($data[$filter['from']][$filter['target_id']]);
 		}
-		return [
-			'tables' => $data['tables'],
-			'references' => $data['references'],
-		];
+		return $data;
 	}
 
 	public function put($data, $mtime, $name = '')

@@ -14,6 +14,7 @@ class RequestTable implements \pieni\Sync\Driver
 		$this->request_database = $params['request_database'];
 		$this->actual_table = $params['actual_table'];
 		$this->application_table = $params['application_table'];
+		$this->filter_table = $params['filter_table'];
 	}
 
 	public function mtime($name = '')
@@ -22,7 +23,8 @@ class RequestTable implements \pieni\Sync\Driver
 		return max(
 			$this->request_database->mtime($actor),
 			$this->actual_table->mtime(''),
-			$this->application_table->mtime($alias)
+			$this->application_table->mtime($alias),
+			$this->filter_table->mtime($alias)
 		);
 	}
 
@@ -60,10 +62,11 @@ class RequestTable implements \pieni\Sync\Driver
 				];
 			}
 		}
-		foreach ($application_table['unset'] as $unset) {
-			if (preg_match("/{$unset['actor']}/", $actor) && preg_match("/{$unset['alias']}/", $alias) && preg_match("/{$unset['action']}/", $action)) {
-				unset($data[$unset['from']][$unset['unset']]);
-			}
+		foreach ($this->filter_table->get($alias)['filters'] as $filter) {
+			if (!in_array($filter['actor'], ['', $actor])) continue;
+			if (!in_array($filter['alias'], ['', $alias])) continue;
+			if (!in_array($filter['action'], ['', $action])) continue;
+			unset($data[$filter['from']][$filter['target_id']]);
 		}
 		return $data;
 	}
