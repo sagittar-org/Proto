@@ -35,9 +35,10 @@ class RequestDatabase implements \pieni\Sync\Driver
 		foreach ($application_database['references'] as $reference_name => $reference) {
 			$data['references'][$reference_name] = $actual_database['references'][$reference_name];
 		}
-		foreach ($this->filter_database->get()['filters'] as $filter) {
-			if (!in_array($filter['actor'], ['', $actor])) continue;
-			unset($data[$filter['from']][$filter['target_id']]);
+		foreach (array_keys($this->filter_database->get()['filters']) as $filter_name) {
+			list($filter['actor'], $filter['from'], $filter['id']) = explode('.', $filter_name);
+			if (!in_array($filter['actor'], ['*', $actor])) continue;
+			unset($data[$filter['from']][$filter['id']]);
 		}
 		return $data;
 	}

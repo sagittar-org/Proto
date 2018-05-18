@@ -4,7 +4,7 @@ namespace pieni\Proto;
 class FilterTable implements \pieni\Sync\Driver
 {
 	public static $columns = [
-		'filters' => ['actor', 'alias', 'action', 'from', 'target_id'],
+		'filters' => [],
 	];
 
 	public function __construct($params = [])

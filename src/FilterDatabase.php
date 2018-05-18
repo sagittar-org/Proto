@@ -4,7 +4,7 @@ namespace pieni\Proto;
 class FilterDatabase implements \pieni\Sync\Driver
 {
 	public static $columns = [
-		'filters' => ['actor', 'from', 'target_id'],
+		'filters' => [],
 	];
 
 	public function __construct($params = [])

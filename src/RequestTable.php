@@ -62,11 +62,12 @@ class RequestTable implements \pieni\Sync\Driver
 				];
 			}
 		}
-		foreach ($this->filter_table->get($alias)['filters'] as $filter) {
-			if (!in_array($filter['actor'], ['', $actor])) continue;
-			if (!in_array($filter['alias'], ['', $alias])) continue;
-			if (!in_array($filter['action'], ['', $action])) continue;
-			unset($data[$filter['from']][$filter['target_id']]);
+		foreach (array_keys($this->filter_table->get($alias)['filters']) as $filter_name) {
+			list($filter['actor'], $filter['alias'], $filter['action'], $filter['from'], $filter['id']) = explode('.', $filter_name);
+			if (!in_array($filter['actor'], ['*', $actor])) continue;
+			if (!in_array($filter['alias'], ['*', $alias])) continue;
+			if (!in_array($filter['action'], ['*', $action])) continue;
+			unset($data[$filter['from']][$filter['id']]);
 		}
 		return $data;
 	}
